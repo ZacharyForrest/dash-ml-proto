@@ -69,6 +69,8 @@ def render_tab_content(active_tab, data):
                 [
                     dbc.Input(id="text_input", placeholder="Type something...", type="text"),
                     html.Br(),
+                    html.Br(),
+                    html.Br(),
                     html.P(id="prediction"),
                 ]
             )
@@ -100,9 +102,10 @@ def generate_graphs(n):
 @app.callback(Output("prediction", "children"), [Input("text_input", "value")])
 def output_text(value):
     if value:
+        vectorizer, lr = pickle.load(open('model2.pkl', 'rb'))
         return job_title_fun(lr, vectorizer, value)
 
 
 if __name__ == "__main__":
-    vectorizer, lr = pickle.load(open('model2.pkl', 'rb'))
+
     application.run(debug=True, port=8000)
