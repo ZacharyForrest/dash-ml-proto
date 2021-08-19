@@ -16,6 +16,7 @@ from dash.dependencies import Input, Output
 from predict import job_title_fun
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
+application = app.server
 
 app.layout = dbc.Container(
     [
@@ -104,4 +105,4 @@ def output_text(value):
 
 if __name__ == "__main__":
     vectorizer, lr = pickle.load(open('model2.pkl', 'rb'))
-    app.run_server(debug=True, port=8888)
+    application.run(debug=True, port=8000)
